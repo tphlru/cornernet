@@ -3,6 +3,7 @@ from torch.utils.cpp_extension import BuildExtension, CppExtension
 
 setup(
     name="cpools",
+    setup_requires=['torch'],
     ext_modules=[
         CppExtension("top_pool", ["src/top_pool.cpp"]),
         CppExtension("bottom_pool", ["src/bottom_pool.cpp"]),
