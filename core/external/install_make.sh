@@ -1,13 +1,22 @@
 #!/bin/bash
 
+# Function to check if make is already installed
+check_make() {
+    if command -v make &> /dev/null; then
+        echo "make is already installed:"
+        make --version
+        exit 0
+    fi
+}
+
 install_make_linux() {
     if command -v apt-get &> /dev/null; then
         sudo apt-get update
-        sudo apt-get install -y make
+        sudo apt-get install -y make gcc
     elif command -v yum &> /dev/null; then
         sudo yum install -y make
     elif command -v dnf &> /dev/null; then
-        sudo dnf install -y make
+        sudo dnf install -y make gcc
     elif command -v zypper &> /dev/null; then
         sudo zypper install -y make
     elif command -v pacman &> /dev/null; then
@@ -53,6 +62,9 @@ install_make_windows() {
         fi
     fi
 }
+
+# Check if make is already installed
+check_make
 
 # Detect the operating system
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
